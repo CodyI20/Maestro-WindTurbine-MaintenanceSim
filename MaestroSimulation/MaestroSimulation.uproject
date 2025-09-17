@@ -40,6 +40,17 @@
 				"LinuxArm64",
 				"Android"
 			]
+		},
+		{
+			"Name": "OpenXRExpansionPlugin",
+			"Enabled": true,
+			"SupportedTargetPlatforms": [
+				"Win64",
+				"Linux",
+				"Android",
+				"Mac",
+				"IOS"
+			]
 		}
 	],
 	"TargetPlatforms": [
