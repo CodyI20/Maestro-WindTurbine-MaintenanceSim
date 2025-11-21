@@ -23,17 +23,13 @@ FProperty* USettingsComparisonBPLibrary::FindPropertyByName(USaveGame* SaveGameO
 bool USettingsComparisonBPLibrary::HasFloatChanged(USaveGame* SaveGameObject, FName PropertyName, float CurrentValue, float Tolerance)
 {
     FProperty* Property = FindPropertyByName(SaveGameObject, PropertyName);
-    if (FStructProperty* StructProp = CastField<FStructProperty>(Property))
-    {
-        // Could add struct type-specific handling here (e.g. FVector)
-    }
     if (FFloatProperty* FloatProp = CastField<FFloatProperty>(Property))
     {
         const void* ValuePtr = FloatProp->ContainerPtrToValuePtr<void>(SaveGameObject);
         float SavedValue = FloatProp->GetFloatingPointPropertyValue(ValuePtr);
         return !FMath::IsNearlyEqual(SavedValue, CurrentValue, Tolerance);
     }
-    return true; // If property not found or type mismatch, assume changed
+    return true; // If the property is not found or there is a type mismatch, assume change
 }
 
 bool USettingsComparisonBPLibrary::HasBoolChanged(USaveGame* SaveGameObject, FName PropertyName, bool CurrentValue)
@@ -45,7 +41,7 @@ bool USettingsComparisonBPLibrary::HasBoolChanged(USaveGame* SaveGameObject, FNa
         bool SavedValue = BoolProp->GetPropertyValue(ValuePtr);
         return SavedValue != CurrentValue;
     }
-    return true;
+    return true; // If the property is not found or there is a type mismatch, assume change
 }
 
 bool USettingsComparisonBPLibrary::HasStringChanged(USaveGame* SaveGameObject, FName PropertyName, const FString& CurrentValue)
@@ -57,7 +53,7 @@ bool USettingsComparisonBPLibrary::HasStringChanged(USaveGame* SaveGameObject, F
         FString SavedValue = StrProp->GetPropertyValue(ValuePtr);
         return !SavedValue.Equals(CurrentValue, ESearchCase::CaseSensitive);
     }
-    return true;
+    return true; // If the property is not found or there is a type mismatch, assume change
 }
 
 bool USettingsComparisonBPLibrary::HasIntChanged(USaveGame* SaveGameObject, FName PropertyName, int32 CurrentValue)
@@ -69,5 +65,5 @@ bool USettingsComparisonBPLibrary::HasIntChanged(USaveGame* SaveGameObject, FNam
         int32 SavedValue = IntProp->GetSignedIntPropertyValue(ValuePtr);
         return SavedValue != CurrentValue;
     }
-    return true;
+    return true; // If the property is not found or there is a type mismatch, assume change
 }
