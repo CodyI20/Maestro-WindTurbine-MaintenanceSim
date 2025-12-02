@@ -39,8 +39,8 @@ struct FTutorialAction
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "ActionType == ETutorialActionType::CallActorEvent", EditConditionHides))
 	FName EventName;
 
-	// Visible ONLY when ActionType is SetObject
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, AdvancedDisplay)
+	// Invisible for now
+	UPROPERTY(BlueprintReadWrite)
 	UObject* ParameterObject;
 
 	// Visible ONLY when ActionType is CheckPlayer
