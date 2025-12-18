@@ -40,6 +40,8 @@ void UObjectiveManagerComponent::AddObjective(UObjectiveBase* NewObjective)
 	ActiveObjectives.Add(NewObjective);
 	NewObjective->ActivateObjective(GetWorld());
 
+	NewObjective->OnObjectiveCompleted.AddDynamic(this, &UObjectiveManagerComponent::HandleObjectiveCompleted);
+
 	// No focus yet -> auto-focus this new one.
 	if (TrackedObjective == nullptr)
 	{
@@ -53,7 +55,7 @@ void UObjectiveManagerComponent::AddObjective(UObjectiveBase* NewObjective)
 void UObjectiveManagerComponent::SetTrackedObjective(UObjectiveBase* NewTracked)
 {
 	TrackedObjective = NewTracked;
-	// NOTE: Could broadcast delegate here in case we have a HUD
+	OnTrackedObjectiveChanged.Broadcast(NewTracked);
 }
 
 void UObjectiveManagerComponent::ReportEvent(FName EventTag, int32 Value)
@@ -83,6 +85,32 @@ void UObjectiveManagerComponent::ReportProgress(FName EventTag, float Value)
 void UObjectiveManagerComponent::HandleSubsystemEvent(FName Tag, int32 Value)
 {
 	ReportEvent(Tag, Value);
+}
+
+void UObjectiveManagerComponent::HandleObjectiveCompleted(UObjectiveBase* CompletedObjective)
+{
+	// If the one that just finished was our "Main Focus"...
+	if (TrackedObjective == CompletedObjective)
+	{
+		// ...we need to find a new one!
+		FindNextTrackedObjective();
+	}
+}
+
+void UObjectiveManagerComponent::FindNextTrackedObjective()
+{
+	// Loop through all objectives to find the first one that is NOT done
+	for (UObjectiveBase* Obj : ActiveObjectives)
+	{
+		if (Obj && !Obj->bIsCompleted)
+		{
+			SetTrackedObjective(Obj);
+			return; // Found one! Stop looking.
+		}
+	}
+
+	// If we get here, the player has finished EVERYTHING.
+	SetTrackedObjective(nullptr);
 }
 
 UObjectiveBase* UObjectiveManagerComponent::GetObjectiveByID(FName ID)
