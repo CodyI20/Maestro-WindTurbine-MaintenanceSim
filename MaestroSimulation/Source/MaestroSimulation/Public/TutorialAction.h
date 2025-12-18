@@ -23,7 +23,7 @@ struct FTutorialAction
 	
 	// The "Switch" variable
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	ETutorialActionType ActionType;
+	ETutorialActionType ActionType = ETutorialActionType::DestroyActor;
 
 	// --- Conditional Fields ---
 
@@ -33,7 +33,7 @@ struct FTutorialAction
 
 	// Visible ONLY when ActionType is PlaySound
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "ActionType == ETutorialActionType::PlaySound", EditConditionHides))
-	USoundBase* Sound;
+	USoundBase* Sound = nullptr;
 
 	// Visible ONLY when ActionType is TriggerEvent
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "ActionType == ETutorialActionType::CallActorEvent", EditConditionHides))
@@ -41,9 +41,9 @@ struct FTutorialAction
 
 	// Invisible for now
 	UPROPERTY(BlueprintReadWrite)
-	UObject* ParameterObject;
+	UObject* ParameterObject = nullptr;
 
 	// Visible ONLY when ActionType is CheckPlayer
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "ActionType == ETutorialActionType::CallActorEvent", EditConditionHides))
-	bool IsReferencingPlayer;
+	bool IsReferencingPlayer = false;
 };
