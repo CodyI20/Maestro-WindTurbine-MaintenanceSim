@@ -82,7 +82,7 @@ void UObjectiveManagerComponent::ReportProgress(FName EventTag, float Value)
 }
 
 // Forward the call from the subsystem
-void UObjectiveManagerComponent::HandleSubsystemEvent(FName Tag, int32 Value)
+void UObjectiveManagerComponent::HandleSubsystemEvent(FName Tag, float Value)
 {
 	ReportEvent(Tag, Value);
 }

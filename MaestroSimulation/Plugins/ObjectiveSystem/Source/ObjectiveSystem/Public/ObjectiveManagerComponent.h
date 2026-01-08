@@ -16,7 +16,7 @@ public:
 
 private:
 	UFUNCTION()
-	void HandleSubsystemEvent(FName Tag, int32 Value);
+	void HandleSubsystemEvent(FName Tag, float Value);
 
 protected:
 	virtual void BeginPlay() override;
