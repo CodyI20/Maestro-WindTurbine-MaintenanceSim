@@ -43,7 +43,7 @@ public:
 
 	// To be called when something happens in game (e.g. "PickUpTool", 1)
 	UFUNCTION(BlueprintCallable, Category = "Objectives")
-	void ReportEvent(FName EventTag, int32 Value = 1);
+	void ReportEvent(FName EventTag, float Value = 1);
 
 	// Continuous progress (e.g. 0.5 for 50%)
 	UFUNCTION(BlueprintCallable, Category = "Objectives")

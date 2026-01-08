@@ -27,7 +27,7 @@ void UObjectiveSequential::ActivateObjective(UObject* WorldContextObject)
     }
 }
 
-void UObjectiveSequential::OnExternalEvent_Implementation(FName EventTag, int32 Value)
+void UObjectiveSequential::OnExternalEvent_Implementation(FName EventTag, float Value)
 {
     if (bIsCompleted) return;
 
@@ -35,17 +35,6 @@ void UObjectiveSequential::OnExternalEvent_Implementation(FName EventTag, int32 
     if (Objectives.IsValidIndex(CurrentStepIndex))
     {
         Objectives[CurrentStepIndex]->OnExternalEvent(EventTag, Value);
-    }
-}
-
-void UObjectiveSequential::OnExternalProgress_Implementation(FName EventTag, float Value)
-{
-    if (bIsCompleted) return;
-
-    // Forward progress to the current active step
-    if (Objectives.IsValidIndex(CurrentStepIndex))
-    {
-        Objectives[CurrentStepIndex]->OnExternalProgress(EventTag, Value);
     }
 }
 

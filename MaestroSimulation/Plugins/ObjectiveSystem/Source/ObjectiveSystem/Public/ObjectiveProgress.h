@@ -28,6 +28,6 @@ public:
 	// -- Overrides --
 
 	virtual void ActivateObjective(UObject* WorldContextObject) override;
-	virtual void OnExternalEvent_Implementation(FName EventTag, int32 Value) override;
+	virtual void OnExternalEvent_Implementation(FName EventTag, float Value) override;
 	virtual FText GetProgressText_Implementation() override;
 };

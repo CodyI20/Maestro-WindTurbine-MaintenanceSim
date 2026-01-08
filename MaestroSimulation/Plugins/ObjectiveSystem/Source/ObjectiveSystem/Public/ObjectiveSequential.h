@@ -28,8 +28,7 @@ public:
 	virtual void ActivateObjective(UObject* WorldContextObject) override;
     
 	// Override these to forward the events to the *active* sub-objective only
-	virtual void OnExternalEvent_Implementation(FName EventTag, int32 Value) override;
-	virtual void OnExternalProgress_Implementation(FName EventTag, float Value) override;
+	virtual void OnExternalEvent_Implementation(FName EventTag, float Value) override;
 	virtual FText GetProgressText_Implementation() override;
 
 private:

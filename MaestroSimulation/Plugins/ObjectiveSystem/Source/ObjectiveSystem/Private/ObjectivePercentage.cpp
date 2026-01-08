@@ -6,7 +6,7 @@ void UObjectivePercentage::ActivateObjective(UObject* WorldContextObject)
 	CurrentPercentage = 0.0f;
 }
 
-void UObjectivePercentage::OnExternalProgress_Implementation(FName EventTag, float Value)
+void UObjectivePercentage::OnExternalEvent_Implementation(FName EventTag, float Value)
 {
 	if (bIsCompleted) return;
 
@@ -40,7 +40,7 @@ void UObjectivePercentage::OnExternalProgress_Implementation(FName EventTag, flo
 
 FText UObjectivePercentage::GetProgressText_Implementation()
 {
-	if (bIsCompleted) return FText::FromString("Completed");
+	if (bIsCompleted) return FText::FromString("Done");
 
 	// Formats as percentage: "45%"
 	return FText::AsPercent(CurrentPercentage);
