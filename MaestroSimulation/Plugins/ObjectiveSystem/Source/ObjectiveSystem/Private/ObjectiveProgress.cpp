@@ -6,7 +6,7 @@ void UObjectiveProgress::ActivateObjective(UObject* WorldContextObject)
 	CurrentAmount = 0;
 }
 
-void UObjectiveProgress::OnExternalEvent_Implementation(FName EventTag, int32 Value)
+void UObjectiveProgress::OnExternalEvent_Implementation(FName EventTag, float Value)
 {
 	if (bIsCompleted) return;
 

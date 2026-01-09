@@ -1,6 +1,6 @@
 #include "ObjectiveWorldSubsystem.h"
 
-void UObjectiveWorldSubsystem::BroadcastObjectiveEvent(FName Tag, int32 Value)
+void UObjectiveWorldSubsystem::BroadcastObjectiveEvent(FName Tag, float Value)
 {
 	OnObjectiveEventReported.Broadcast(Tag, Value);
 }

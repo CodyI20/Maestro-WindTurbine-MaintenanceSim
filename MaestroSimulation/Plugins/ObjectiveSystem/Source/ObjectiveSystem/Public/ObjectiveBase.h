@@ -53,12 +53,9 @@ public:
     // The main way the game talks to the objective. 
     // Derived classes will override this to check specific conditions (e.g., "PickedUpTool", 1).
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Objective")
-    void OnExternalEvent(FName EventTag, int32 Value);
-    
-    UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Objective")
-    void OnExternalProgress(FName EventTag, float Value);
+    void OnExternalEvent(FName EventTag, float Value);
 
-    virtual void OnExternalEvent_Implementation(FName EventTag, int32 Value);
+    virtual void OnExternalEvent_Implementation(FName EventTag, float Value);
 
     // Helper to get formatted status (e.g. "5/10")
     UFUNCTION(BlueprintNativeEvent, BlueprintPure, Category = "UI")

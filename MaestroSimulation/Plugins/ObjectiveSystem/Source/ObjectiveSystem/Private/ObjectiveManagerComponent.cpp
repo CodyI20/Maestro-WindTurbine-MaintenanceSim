@@ -58,7 +58,7 @@ void UObjectiveManagerComponent::SetTrackedObjective(UObjectiveBase* NewTracked)
 	OnTrackedObjectiveChanged.Broadcast(NewTracked);
 }
 
-void UObjectiveManagerComponent::ReportEvent(FName EventTag, int32 Value)
+void UObjectiveManagerComponent::ReportEvent(FName EventTag, float Value)
 {
 	// Loop through all the active objectives and pass the event down
 	for (UObjectiveBase* Obj : ActiveObjectives)
@@ -76,13 +76,13 @@ void UObjectiveManagerComponent::ReportProgress(FName EventTag, float Value)
 	{
 		if (Obj && !Obj->bIsCompleted)
 		{
-			Obj->OnExternalProgress(EventTag, Value);
+			Obj->OnExternalEvent(EventTag, Value);
 		}
 	}
 }
 
 // Forward the call from the subsystem
-void UObjectiveManagerComponent::HandleSubsystemEvent(FName Tag, int32 Value)
+void UObjectiveManagerComponent::HandleSubsystemEvent(FName Tag, float Value)
 {
 	ReportEvent(Tag, Value);
 }

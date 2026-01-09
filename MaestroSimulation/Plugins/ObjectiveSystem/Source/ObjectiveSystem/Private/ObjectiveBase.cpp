@@ -14,16 +14,10 @@ void UObjectiveBase::CompleteObjective()
 	OnObjectiveCompleted.Broadcast(this);
 }
 
-void UObjectiveBase::OnExternalEvent_Implementation(FName EventTag, int32 Value)
+void UObjectiveBase::OnExternalEvent_Implementation(FName EventTag, float Value)
 {
 	// Default behavior: do nothing
 	// Allows specific objectives to ignore events they don't care about.
-}
-
-void UObjectiveBase::OnExternalProgress_Implementation(FName EventTag, float Value)
-{
-	// Default behavior: do nothing.
-	// To be overriden in derived classes.
 }
 
 FText UObjectiveBase::GetProgressText_Implementation()
